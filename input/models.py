@@ -6,6 +6,13 @@ MODULE_CHOICES = (
     ('N', 'عدد'),
 )
 
+M10FORM_ITEMTYPE_CHOICES = (
+        ('SA', 'معاش'),
+        ('PA', 'مسافرت'),
+        ('PU', 'خریداری')
+)
+
+
 class SuggestionForm(models.Model):
     number = models.IntegerField()
     issued_date = models.DateField(auto_now=False, auto_now_add=False)
@@ -22,14 +29,14 @@ class SuggestionForm(models.Model):
 
 class M3Form(models.Model):
     suggestion_form = models.ForeignKey(SuggestionForm, on_delete=models.CASCADE)
-    purchase_order_num = models.IntegerField() #check data type
+    purchase_order_num = models.IntegerField() 
     issued_date = models.DateField(auto_now=False, auto_now_add=False)
-    purchase_suggestion_num = models.IntegerField() #check data type
+    purchase_suggestion_num = models.IntegerField() 
 
 
 class M3FormDetail(models.Model):
     form = models.ForeignKey(M3Form, on_delete=models.CASCADE)
-    description = models.CharField(max_length=100) #check data type
+    description = models.TextField() 
     item = models.CharField(max_length=30)
     quantity = models.IntegerField()
     module = models.CharField(max_length=1, choices=MODULE_CHOICES) 
@@ -41,7 +48,7 @@ class M7Form(models.Model):
     report_num = models.IntegerField()
     issued_date = models.DateField(auto_now=False, auto_now_add=False)
     order_num = models.IntegerField()
-    # purchase_lace = 
+    purchase_place = models.CharField(max_length=20, default="بازار هرات")
 
 
 class M7FormDetail(models.Model):
@@ -52,23 +59,23 @@ class M7FormDetail(models.Model):
     observations = models.CharField(max_length=60)
 
 class M11Form(models.Model):
-    document_num = models.IntegerField() #check data type
+    document_num = models.IntegerField() 
     issued_date = models.DateField(auto_now=False, auto_now_add=False)
 
 
 class M11FormDetail(models.Model):
     form = models.ForeignKey(M11Form, on_delete=models.CASCADE)
-    description = models.CharField(max_length=100)
+    description = models.CharField(max_length=150)
     expenses = models.IntegerField()
-    # dedicated =
+    dedicated = models.CharField(max_length=50)
 
 
 class M10Form(models.Model):
     suggestion_num = models.IntegerField()
     issue_date = models.DateField(auto_now=False, auto_now_add=False)
     applicator = models.CharField(max_length=50)  #check data type 
-    # item_type 
+    item_type  = models.CharField(max_length=2, choices=M10FORM_ITEMTYPE_CHOICES)
     amount = models.IntegerField()
-    # descript
+    descript = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
 
