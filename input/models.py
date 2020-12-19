@@ -14,17 +14,17 @@ M10FORM_ITEMTYPE_CHOICES = (
 
 
 class SuggestionForm(models.Model):
-    number = models.IntegerField()
-    issued_date = models.DateField(auto_now=False, auto_now_add=False)
-    deanship = models.CharField(max_length=100)
-    department = models.CharField(max_length=100)
-    topic = models.CharField(max_length=100)
-    description = models.TextField()
-    dean = models.CharField(max_length=30)
-    dean_commandment = models.TextField()
-    addminstartion_commandment = models.TextField()
-    advice_commitee = models.TextField()
-    addminstration_final = models.TextField()
+    number = models.IntegerField(verbose_name="شماره")
+    issued_date = models.DateField(auto_now=False, auto_now_add=False, verbose_name="تاریخ")
+    deanship = models.CharField(max_length=100, verbose_name="مقام مربوطه")
+    department = models.CharField(max_length=100, verbose_name="ریاست مربوطه")
+    topic = models.CharField(max_length=100, verbose_name="موضوغ")
+    description = models.TextField(verbose_name="توضحات")
+    dean = models.CharField(max_length=30, verbose_name="اسم ریس")
+    dean_commandment = models.TextField(verbose_name="حکم ریس")
+    addminstartion_commandment = models.TextField(verbose_name="حکم بخش اداری")
+    advice_commitee = models.TextField(verbose_name="نظر هیت")
+    addminstration_final = models.TextField(verbose_name="اجرات بخش اداری")
 
 
 class M3Form(models.Model):
