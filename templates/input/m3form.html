@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% block title %}
+  فورم-م3 
+{% endblock title %}
+{% load static %}
+{% load crispy_forms_tags %} 
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+ {% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>M-3</title> -->
+	<!-- <link
+      href="../../static/assets/css/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+    /> -->
+    <link
+        href="{% static 'assets/css/bootstrap.min.css' %}"
+        rel="stylesheet"
+        type="text/css"
+    />
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: right;
+        }
+        td{
+            height: 30px;
+        }
+        table {
+            direction: ltr;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <div>
+            <h3 style="text-align: center;">آمر خریداری</h3>
+            <h4 style="text-align: right;">فورم م-3-</h4>
+        </div>
+<table style="width: 100%;">
+    <tr>
+        <td colspan="2"><p>نمبر آمر خریداری: {{ m3obj.purchase_order_num }}</p></td>
+    </tr>
+    <tr>
+        <td colspan="2"><p>{{ m3obj.purchase_order_num }}   تاریخ صدور </p></td>
+        <td rowspan="2" colspan="6"><p>هویت تهیه کننده:  ریاست مخابرات و تکنالوژی معلوماتی ولایت هرات</p></td>
+    </tr>
+    <tr>
+        <td colspan="2"><p> {{ m3obj.purchase_order_num }} نمبر درخواست خریداری</p></td>
+    </tr>
+    <tr>
+        <th style="width: 15%;"><p>مجموعه قیمت</p></th>
+        <th style="width: 15%;"><p>فیات</p></th>
+        <th style="width: 10%;"><p> تعداد/دانه</p></th>
+        <th style="width: 10%;"><p>جنس</p></th>
+        <th style="width: 40%;" colspan="3"><p>تشریحات</p></th>
+        <th style="width: 10%;"><p>نمبر اقلام</p></th>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>9</td>
+        <td>8</td>
+        <td>7</td>
+        <td colspan="3">6</td>
+        <td>5</td>
+    </tr>
+    {% for item in m3obj_items %}
+    <tr>
+        <td>{{ item.price }}</td>
+        <td>{{ item.get_module_display }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.item }}</td>
+        <td colspan="3">{{ item.description }}</td>
+        <td >{{ forloop.counter }}</td>
+    </tr>
+    {% endfor %}
+   
+    <tr>
+        <td>افغانی {{ total_amount }}  </td>
+        <td>12 مجموع قیمت موافقه شده</td>
+        <td colspan="6">11 منظوری دار از طرف آمر محاسبه تصدیق شد.</td>
+    </tr>
+    <tr>
+        <td>10800</td>
+        <td>13 مبلغ پیشکی</td>
+        <td colspan="6">
+            <div class="row justify-content-between px-3">
+                <p style="margin-left: 350px;">تاریخ</p>
+                <p>امضأ</p>
+            </div>
+
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>14 مابقی مبلغ که بعد از عرصه مکمل اشیا تأدیه شود.</td>
+        <td colspan="6">مأموریت</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td> 15 امضأ آمر صادر کننده:</td>
+        <td colspan="6" rowspan="2">16 اداره فرمایش دهند:</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td> مأموریت آمر صادر کننده:</td>
+    </tr>
+    <tr>
+        <td colspan="2"> 18 فرمایش را قبول و مبلغ پیشکی فوق الذکر تسلیم شدم</td>
+        <td colspan="6">17 تسلیم شود به</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div class="row px-4">
+                <p style="margin-left: auto;">تاریخ:</p>
+                <p style="margin-left: auto;">امضأ تهیه کننده:</p>
+            </div>
+        </td>
+        <td colspan="6"> 19 تاریخ که اشیأ مطلوب اند:</td>
+    </tr>
+    <tr>
+        <td colspan="8" style="text-align: center;">محاسبه</td>
+    </tr>
+    <tr>
+        <td colspan="3" style="width: 15%;">امر تأدیه</td>
+        <td rowspan="2" style="width: 10%;">مبلغ تعهدشده</td>
+        <td rowspan="2" style="width: 15%;">دیگر حسابات</td>
+        <td rowspan="2" style="width: 15%;"> نمبر خصوصی</td>
+        <td colspan="2" style="width: 40%; text-align: center;">تخصیصات</td>
+    </tr>
+    <tr>
+        <td>تاریخ</td>
+        <td>نمبر</td>
+        <td>مبلغ</td>
+        <td>عنوان</td>
+        <td>علامه</td>
+    </tr>
+    <tr>
+        <td>27</td>
+        <td>26</td>
+        <td>25</td>
+        <td>24</td>
+        <td>23</td>
+        <td>22</td>
+        <td>21</td>
+        <td>20</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+<h6 style="text-align: center;">(28) ثبت راپور رسیدات</h6>
+<table  style="width: 100%; height: 50px;">
+    <tr>
+        <td>تاریخ</td>
+        <td>نمبر</td>
+        <td>مبلغ</td>
+        <td style="width: 10%;">تاریخ</td>
+        <td>نمبر</td>
+        <td>تحویلی</td>
+        <td>تاریخ</td>
+        <td>نمبر</td>
+        <td>تحویلی</td>
+        <td>تاریخ</td>
+        <td>نمبر</td>
+        <td>تحویلی</td>
+        <td>تاریخ</td>
+        <td>نمبر</td>
+        <td>تحویلی</td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
+{% endblock content %}

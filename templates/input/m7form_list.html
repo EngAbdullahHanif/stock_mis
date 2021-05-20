@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% block title %}
+  م-7 
+{% endblock title %}
+{% load static %}
+{% load crispy_forms_tags %} 
+{% block content %}
+{% include 'input/modals/modal_body.html' %}
+<div class="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <h5 class="m-0 text-center">
+                                لست فورمهای م-7
+                            </h5>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                <!-- end row -->
+                </div>
+                <!-- end page-title-box -->
+            </div>
+        </div>
+        <!-- end page title -->
+
+        <!-- Page main content starts -->
+      <div class=" my-5">
+        <form action="."  method="GET">
+          <div class="form-row">
+            <div class="form-group col-md-3 col-lg-3">
+                <label for="minDate">از تاریخ</label>
+                <input type="date" class="form-control" name="min_date" id="minDate" placeholder="از تاریخ">
+            </div>
+            <div class="form-group col-md-3 col-lg-3">
+                <label for="maxDate">ایلا تاریخ</label>
+                <input type="date" class="form-control" name="max_date" id="maxDate" placeholder="ایلا تاریخ">
+            </div> 
+          </div>
+          <button type="submit" class=" btn btn-primary ">جستجو</button>
+        </form>
+      </div>
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <h4 class="mt-0 text-center">
+                        لست عمومی
+                        </h4>
+                        <table
+                        id="datatable"
+                        class="table table-bordered dt-responsive nowrap"
+                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                                <tr>
+                                <th>#</th>
+                                <th>نمبر فرمایش</th>  
+                                <th>نمبر راپور</th>
+                                <th>تاریخ </th>
+                                <th style="border-right: solid rgb(231, 230, 230) 1.4px;">عملیات </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for m7obj in m7objs %}
+                                <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ m7obj.suggestion_form }}</td>
+                                <td>{{ m7obj.report_num }}</td>
+                                <td>{{ m7obj.issued_date }}</td>
+                                <td class="text-center">
+                                    <!-- Read bill buttons -->
+                                    <a href="{% url 'm7form' m7obj.pk %}" class="btn btn-info btn-sm">
+                                    <span class="">جزیات</span>
+                                    </a>
+                                </td>
+                                </tr> 
+                                {% endfor %}               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- Page main content ends -->
+        <!-- end row -->
+    </div>
+    <!-- container fluid -->
+</div>
+<!-- Page content Wrapper -->
+
+</div>
+<!-- content -->
+        
+{% endblock content %}
+
+
+{% block modal_scripts %}
+<script src="{% static 'assets/js/custom.js' %}"></script>
+<script type="text/javascript">
+
+      
+  console.log('this is notssdfsdfsadfasddfsdfsdfs working')
+  $(function () {
+
+    // Create bill button opens modal with id="create-modal"
+      $("#farebill").modalForm({
+        formURL: $(this).data("farebill-id"),
+        modalID: "#create-modal",
+      });
+
+      $("#farebill-1").click(function () {
+        console.log($(this).attr("data-farebill-id"));
+      });
+
+    var asyncSuccessMessage = [
+      "<div ",
+      "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+      "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+      "Success: bill was updated.",
+      "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+      "<span aria-hidden='true'>&times;</span>",
+      "</button>",
+      "</div>",
+      "<script>",
+      "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+      "<\/script>",
+    ].join("");
+
+    function updatebillModalForm() {
+      $(".update-bill").each(function () {
+        $(this).modalForm({
+          formURL: $(this).data("form-url"),
+          asyncUpdate: true,
+          asyncSettings: {
+            closeOnSubmit: true,
+            successMessage: asyncSuccessMessage,
+            dataUrl: "bills/",
+            dataElementId: "#bills-table",
+            dataKey: "table",
+            addModalFormFunction: updatebillModalForm,
+          },
+        });
+      });
+    }
+    updatebillModalForm();
+
+    // Read and Delete bill buttons open modal with id="modal"
+    // The formURL is retrieved from the data of the element
+    $(".bs-modal").each(function () {
+      $(this).modalForm({ formURL: $(this).data("form-url") });
+    });
+
+    // Hide message
+    $(".alert")
+      .fadeTo(5000, 500)
+      .slideUp(500, function () {
+        $(".alert").slideUp(500);
+      });
+  });
+
+  function create_pdf(){
+
+    var doc = new jsPDF()
+
+    doc.autoTable({ html: '#datatable' });
+    //doc.addFileToVFS("{% static 'assets/font/IRANSansWeb_Light.ttf' %}", 'IRANSans');
+    //doc.setFont('IRANSans')
+
+    let myFont = 'static_files/assets/font/IRANSansWeb_Light.ttf'; // load the *.ttf font file as binary string
+
+    // add the font to jsPDF
+    doc.addFileToVFS("IRANSansWeb_Light.ttf", myFont);
+    doc.addFont("IRANSansWeb_Light.ttf", "MyFont", "normal");
+      
+    doc.setFontSize(10);
+
+    doc.save('table.pdf')
+  }
+
+</script>
+
+{% endblock modal_scripts %}

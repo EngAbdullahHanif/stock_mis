@@ -33,6 +33,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'stock_ims.apps.SuitConfig',
+    # 'suit',
+    'admin_interface',
+    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +47,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap_modal_forms',
     'widget_tweaks',
+    # 'advanced_filters',
+    'rangefilter',
 
     'input',
 ]
@@ -111,7 +117,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa'
 
 TIME_ZONE = 'UTC'
 
@@ -133,3 +140,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # CRISPY
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+X_FRAME_OPTIONS='SAMEORIGIN' # only if django version >= 3.0

@@ -57,7 +57,11 @@
       rel="stylesheet"
       type="text/css"
     />
-  
+    <style>
+      td{
+        height: 30px;
+      } 
+    </style>
   </head>
 
   <body class="fixed-left">
@@ -77,10 +81,10 @@
     <!-- Begin page -->
     <div id="wrapper">
       <!-- sidebar -->
-      {% comment %} {% include "sidebar.html" %} {% endcomment %}
+      {% include "sidebar.html" %}
 
       <!-- header -->
-      {% comment %} {% include "header.html" %} {% endcomment %}
+      {% include "header.html" %}
 
       <div class="mt-5 pt-4">
         {% if messages %} 

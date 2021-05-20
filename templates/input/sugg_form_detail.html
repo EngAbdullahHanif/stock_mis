@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}
+  پیشنهاد 
+{% endblock title %}
+{% load static %}
+{% load crispy_forms_tags %} 
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>پیشنهاد</title>
+        <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+        <link
+            href="../../static/assets/css/bootstrap.min.css"
+            rel="stylesheet"
+            type="text/css"
+        />
+    
+        <!-- <link
+        href="{% static 'assets/css/bootstrap.min.css' %}"
+        rel="stylesheet"
+        type="text/css"
+    /> -->
+    <style>
+        table, th, td {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+        }
+        td{
+            text-align: right;
+        }
+        table {
+            direction: ltr;
+        }
+        
+        </style>
+</head>
+
+    <body>
+        <div class="container">
+            <div class="row justify-content-between pt-2">
+                <img src="logo2.jpg" width="200" alt=""> 
+                    <div class="row mt-5 text-center" >
+                        <div class="mx-5">
+                            <p>د افغانستان اسلامی جمهوری دولت</p>
+                            <p>د مخابراتو او معلوماتی تکنالوژی وزارت</p>
+                        </div>
+                        <div class="mx-5">
+                            <p>وزارت مخابرات و تکنالوژی معلوماتی</p>
+                            <p>دولت جمهوری اسلامی افغانستان</p>
+                        </div>
+            
+                    </div>
+                <img src="logo1.jpg" width="200" alt="">
+            </div>
+            <div class="col justify-content-between text-center">
+                <h5>ریاست مخابرات و تکنالوژی معلوماتی ولایت هرات</h5>
+                <h5>مدیریت عمومی اداری</h5>
+            </div>
+            <div class="container row justify-content-between">
+                <p> شماره: {{ sugg_form.number }} </p>
+                <p> تاریخ: {{ sugg_form.issued_date }} </p>
+            </div>
+        
+            <hr>
+    <table style="width:100%">
+        <tr>
+            <th style="width:30%; text-align: center;">احکام</th>
+            <th style="width:70%; text-align: center;">پیشنهاد</th> 
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <h4> {{ sugg_form.deanship }} </h4>
+                <h4> {{ sugg_form.department }} </h4>
+                <br>
+                <h4><u>موضوع: {{ sugg_form.topic }} </u></h4>
+                <p>!احتراماً مینگاریم</p>
+                <p>
+                    {{ sugg_form.description }}
+                </p>
+                <p style="text-align: center;">با احترام 
+                <br>
+                <br>
+                {{ sugg_form.dean }} 
+                <br>
+                رئیس مخابرات و تکنالوژی معلوماتی
+                </p>
+            </td>
+        </tr>
+    </table>
+            <hr>
+                <div class="container row justify-content-between">
+                    <p>Tel: 040-2220003</p>
+                    <link><a href="https:/www.mcit.gov.af">website: www.mcit.gov.af</a></link>
+                    <address>آدرس: جاده مخابرات، هرات افغانستان</address>
+                </div>
+        </div>
+    </body>
+</html>
+{% endblock content %}

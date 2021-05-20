@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% block title %}
+  فورم-م7 
+{% endblock title %}
+{% load static %}
+{% load crispy_forms_tags %} 
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-7</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: right;
+        }
+        td{
+            height: 40px;
+        }
+        table {
+            direction: ltr;
+        }
+        
+    </style>
+
+</head>
+<body>
+
+    <div class="container mt-3 mb-3">
+        <img class="pt-3" src="logo1.jpg" width="200" alt=""> 
+        <div class="container row justify-content-between pt-5 ">
+            <div>
+            <h4>جمهوری اسلامی افغانستان</h4></div>
+            <h4 style="text-align: center;">راپور رسید</h4>
+            <h4>فورم-م-7</h4>
+    </div>
+        <table style="width: 100%; height: 40px;">
+            <tr>
+                <td style="width: 50%;"><p>اداره: ریاست مخابرات و تکنالوژی معلوماتی</p></td>
+                <td>نمبر راپور: {{ m7obj.report_num }}</td>
+            </tr>
+            <tr>
+                <td><p>محل تسلیمی: تحویل خانه ریاست مخابرات</p></td>
+                <td><p>تاریخ: {{ m7obj.issued_date }}</p></td>
+            </tr>
+            <tr>
+                <td><p>اخذ گردیده از : بزار هرات</p></td>
+                <td><p>نمبر فرمایش: {{ m7obj.suggestion_form }}</p></td>
+            </tr>
+        </table>
+        <table  style="width: 100%; height: 200px;">
+            <tr>
+                <th style="width: 15%; text-align: center;">ملاحظات</th>
+                <th style="width: 15%; text-align: center;">مبلغ</th>
+                <th style="width: 10%; text-align: center;">فیات</th>
+                <th style="width: 35%; text-align: center;">تشریحات</th>
+                <th style="width: 10%; text-align: center;">واحد</th>
+                <th style="width: 10%; text-align: center;">مقدار</th>
+            </tr>
+            {% for item in m7obj_items %}
+            <tr>
+                <td style="width: 15%;">{{ item.observations }}</td>
+                <td style="width: 15%; text-align: center;">{{ item.amount }}</td>
+                <td style="width: 10%; text-align: center;">{{ item.fiyat }}</td>
+                <td style="width: 35%;">{{ item.description }}</td>
+                <td style="width: 10%;">{{ item.get_module_display }}</td>
+                <td style="width: 10%; text-align: center;">{{ item.quantity }}</td>
+            </tr>
+            {% endfor %}
+            </table>
+
+            <table  style="width: 100%;">
+                <tr>
+                    <td colspan="3">
+                        <p style="text-align: left;">مجموعه (10900)افغانی</p><br>
+                        <p style="text-align: center;">به مدیریت محترم عمومی کنترول مقام مستوفیت!</p>
+                        <br>
+                        <br>
+                        <br>
+                        <p> به اساس فورمه م 3 نمبر مورخ 1399/03/26 بابت خریداری مواد شوینده شعبات ریاست مخابرات مبلغ 2190 دو هزار و یکصد و نود افغانی حواله گردیده و اسناد آن غرض ویزا خدمت تقدیم است.</p>
+                        <br>
+                        <br>
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 15%;"></td>
+                    <td style="width: 15%;" style="text-align: center;">10900</td>
+                    <td style="width: 70%;"><p>مجموع قیمت : ده هزار و صد افغانی</p></td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <p>تصدیق میدارم که اجناس یا خدمات فوق الذکر را تسلیم شدم اجناس مذکور را به غو وزن، حساب یا اندازه نموده
+                            <br>
+                            خدمات مذکور را قناعت بخش و اجناس آن را استثنای اقلام میکه در ستون ملاحظات ذکر شده مکمل و سالم بوده است.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <table  style="width: 100%;">
+                <tr>
+                    <td colspan="10"><p>هویت : شاه مردان معتمد</p></td>
+                    <td colspan="13"  style="padding-right: 40px;"><p> محل امضأ</p></td>
+                </tr>
+                <tr>
+                    <td colspan="9" style="width: 30%; text-align: center;"><p> در سند ثبت فرمایش گردید</p></td>
+                    <td style="width: 5%;">9</td>
+                    <td>8</td>
+                    <td>7</td>
+                    <td>6</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td style="width: 25%;" style="text-align: center;"><p>تسلیمی کامل</p></td>
+                </tr>
+                <tr>
+                    <td colspan="9" style="width: 30%; text-align: center;" ><p>امضأ</p></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="width: 25%;"></td>
+                </tr>
+            </table>
+
+    </div>
+    
+</body>
+</html>
+{% endblock content %}
